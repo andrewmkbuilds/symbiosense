@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FileText, Link as LinkIcon, Mail, MapPin, ExternalLink, Plus, Search, CheckCircle2, XCircle, BookOpen } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import ResourcesHero from "@/components/sections/ResourcesHero";
 import OfficialSources from "@/components/OfficialSources";
 import { RESOURCES, OFFICIAL_LINKS, LAST_CHECKED } from "@/lib/bioglowData";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -33,14 +33,14 @@ export default function Resources() {
 
   return (
     <div>
-      <PageHero
-        label="Resources"
-        title="Official FLL Resources"
-        subtitle="Searchable library of official BIOGLOW™ season documents, rules, rubrics, and UAE resources — all from approved official sources. Plus our team's own documents."
+      <ResourcesHero
+        totalCount={RESOURCES.length}
+        availableCount={RESOURCES.filter((r) => r.available).length}
+        lastChecked={LAST_CHECKED}
       />
 
       {/* Official resources library */}
-      <section className="pb-12 relative overflow-hidden">
+      <section className="pb-12 relative overflow-hidden" id="library">
         <div className="absolute inset-0 -z-10">
           <DotField dotRadius={1.2} dotSpacing={28} gradientFrom="#438B78" gradientTo="#9ABF82" gradientAngle={135} glowColor="#438B78" glowRadius={160} glowIntensity={0.4} baseOpacity={0.18} speed={0.25} />
         </div>

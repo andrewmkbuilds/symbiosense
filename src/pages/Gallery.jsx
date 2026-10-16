@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Camera, Trophy, Plus, Award, Medal } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import GalleryHero from "@/components/sections/GalleryHero";
+import TiltCard from "@/components/TiltCard";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
@@ -28,14 +29,10 @@ export default function Gallery() {
 
   return (
     <div>
-      <PageHero
-        label="Gallery & Achievements"
-        title="Gallery & Achievements"
-        subtitle="Photos from our season — team meetings, build sessions, research, prototypes, and competition memories. Achievement details will be added as the season progresses."
-      />
+      <GalleryHero />
 
       {/* Photo gallery */}
-      <section className="pb-12 relative overflow-hidden">
+      <section id="gallery" className="pb-12 relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
           <DotField dotRadius={1.2} dotSpacing={28} gradientFrom="#173F32" gradientTo="#9ABF82" glowColor="#438B78" glowRadius={150} glowIntensity={0.4} baseOpacity={0.18} speed={0.25} />
         </div>
@@ -63,14 +60,18 @@ export default function Gallery() {
             {Array.from({ length: 8 }, (_, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 16, rotateY: -6 }}
+                whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.04 }}
-                className="aspect-[4/3] rounded-2xl border-2 border-dashed border-border bg-secondary/40 flex flex-col items-center justify-center text-muted-foreground hover:border-brand-teal/50 transition-colors"
+                transition={{ duration: 0.45, delay: i * 0.04 }}
+                className="[perspective:1000px]"
               >
-                <Camera className="h-8 w-8 mb-2 opacity-40" />
-                <span className="text-xs font-mono">{activeCategory} {i + 1}</span>
+                <TiltCard max={8} depth={25} className="aspect-[4/3] rounded-2xl glass-strong border border-border/60 bg-secondary/40 flex flex-col items-center justify-center text-muted-foreground hover:border-brand-teal/50 transition-colors card-shine depth-shadow-md" contentClassName="p-0">
+                  <div className="preserve-3d flex flex-col items-center" style={{ transform: "translateZ(12px)" }}>
+                    <Camera className="h-8 w-8 mb-2 opacity-40" />
+                    <span className="text-xs font-mono">{activeCategory} {i + 1}</span>
+                  </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -98,12 +99,14 @@ export default function Gallery() {
             {achievements.map((a, i) => (
               <motion.div
                 key={a.id}
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 14, rotateX: -4 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="rounded-2xl border border-border bg-card p-5"
+                className="[perspective:1000px]"
               >
+                <TiltCard max={6} depth={20} className="rounded-2xl glass-strong border border-border/60 bg-card p-5 card-shine depth-shadow-md h-full" contentClassName="p-0">
+                <div className="preserve-3d">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <Award className="h-5 w-5" />
@@ -133,6 +136,8 @@ export default function Gallery() {
                   />
                   <button onClick={() => setAchievements(achievements.filter((x) => x.id !== a.id))} className="text-muted-foreground hover:text-destructive text-xs">✕</button>
                 </div>
+                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </div>

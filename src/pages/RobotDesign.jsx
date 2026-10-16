@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot, Wrench, Code, Cpu, Camera, GitBranch, FlaskConical, BookOpen, ExternalLink, Award } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import RobotDesignHero from "@/components/sections/RobotDesignHero";
 import OfficialSources from "@/components/OfficialSources";
 import JudgingSessionFlow from "@/components/JudgingSessionFlow";
 import { ROBOT_DESIGN_RUBRIC, OFFICIAL_LINKS, SEASON_INFO } from "@/lib/bioglowData";
@@ -21,14 +21,10 @@ const DESIGN_DECISIONS = [
 export default function RobotDesign() {
   return (
     <div>
-      <PageHero
-        label="Robot Design"
-        title="Robot Design & Judging"
-        subtitle="Official BIOGLOW™ Robot Design judging information, kept separate from our team's own robot notes and tips."
-      />
+      <RobotDesignHero technology={SEASON_INFO.technology} />
 
       {/* Official rubric */}
-      <section className="pb-12 relative overflow-hidden">
+      <section className="pb-12 relative overflow-hidden" id="rubric">
         <div className="absolute inset-0 -z-10">
           <DotField dotRadius={1.2} dotSpacing={26} gradientFrom="#438B78" gradientTo="#9ABF82" gradientAngle={135} glowColor="#438B78" glowRadius={160} glowIntensity={0.4} baseOpacity={0.18} speed={0.25} />
         </div>

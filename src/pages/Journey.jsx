@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Users, Leaf, FlaskConical, Bot, Cpu, Wrench, Calendar, Plus, CheckCircle2, Circle, Trophy, TrendingUp } from "lucide-react";
 import JourneyHero from "@/components/sections/JourneyHero";
+import JourneyGallery from "@/components/sections/JourneyGallery";
 import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
@@ -197,6 +198,8 @@ export default function Journey() {
           )}
         </div>
       </section>
+
+      <JourneyGallery />
     </div>
   );
 }

@@ -17,6 +17,7 @@ import Gallery from '@/pages/Gallery';
 import Resources from '@/pages/Resources';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
+import LiveConsole from '@/pages/LiveConsole';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -51,6 +52,7 @@ const AuthenticatedApp = () => {
         <Route path="/resources" element={<Resources />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/live-console" element={<LiveConsole />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

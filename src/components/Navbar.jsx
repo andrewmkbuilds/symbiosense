@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Leaf, Menu, X } from "lucide-react";
+import NavSearch from "@/components/NavSearch";
 
 const NAV = [
   { label: "Home", to: "/" },
   { label: "SYMBIOSENSE", to: "/innovation", highlight: true },
+  { label: "Live Console", to: "/live-console", highlight: true },
   { label: "Our Team", to: "/team" },
   { label: "Our Journey", to: "/journey" },
   { label: "Robot Game", to: "/robot-game" },
@@ -52,6 +54,7 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-0.5">
+            <NavSearch />
             {NAV.map((l) => (
               <NavLink
                 key={l.to}
@@ -100,6 +103,9 @@ export default function Navbar() {
           className="lg:hidden mx-3 mt-2 glass-strong rounded-2xl depth-shadow-lg overflow-hidden"
         >
           <div className="px-4 py-3 flex flex-col gap-0.5">
+            <div className="px-1 pb-2">
+              <NavSearch />
+            </div>
             {NAV.map((l) => (
               <NavLink
                 key={l.to}
