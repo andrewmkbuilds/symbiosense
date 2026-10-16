@@ -1,10 +1,12 @@
 // ─────────────────────────────────────────────────────────────
 // BIOGLOW™ 2026–2027 Founders Edition — Challenge
-// All data verified from official FIRST® LEGO® League sources.
-// Last checked: 15 October 2026.
+// Audited against the uploaded official Robot Game Rulebook, Team Meeting
+// Guide, Engineering Notebook and Challenge Updates (Sept 2, 2026).
+// Rubric row wording and links are from official pages but could not be
+// re-read in the uploaded files — see the "unverified" notes on each page.
 // ─────────────────────────────────────────────────────────────
 
-export const LAST_CHECKED = "15 October 2026";
+export const LAST_CHECKED = "Audited against official documents (Challenge Updates dated Sept 2, 2026)";
 
 export const SEASON_INFO = {
   name: "BIOGLOW™",
@@ -12,17 +14,10 @@ export const SEASON_INFO = {
   umbrella: "FIRST® CANOPY™",
   edition: "Founders Edition",
   program: "Challenge",
-  ages: "9–16 (varies by country)",
-  grades: "Grades 4–8",
-  technology: "LEGO® Education SPIKE™ Prime",
+  technology: "LEGO® Education SPIKE™ Prime (other listed LEGO® Education sets are also allowed)",
   matchDuration: "2.5 minutes",
-  matchFormat: "Three official matches; best score counts toward awards and advancement",
-  teamSize: "Up to 10 team members",
-  challengeSet: "45832",
-  finalSeason: true,
-  kickoff: "August 4, 2026",
-  registrationDeadline: "October 31, 2026 (Challenge teams)",
-  events: "November 2026 – April 2027",
+  matchFormat: "Three official matches; only the best score counts toward awards and advancement",
+  teamSize: "Teams of up to 10 children",
 };
 
 export const CORE_VALUES = [
@@ -35,10 +30,10 @@ export const CORE_VALUES = [
 ];
 
 export const FOUR_PARTS = [
-  { name: "Core Values", desc: "The lens through which judges evaluate the team throughout their work and event experience. Makes up 25% of the Champion's score." },
-  { name: "Innovation Project", desc: "Teams identify and research a problem that puts biodiversity at risk and design an innovative solution that can help." },
-  { name: "Robot Design", desc: "Teams design, build, and program a LEGO robot with unique attachments and code to complete missions in the robot game." },
-  { name: "Robot Game", desc: "Teams race against the clock to complete as many missions as they can in each 2.5-minute match. 15 biodiversity-inspired missions." },
+  { name: "Core Values", desc: "Evaluated in all parts of a team's work by judges and referees. Each of the four parts accounts for 25% of a team's total performance at an event." },
+  { name: "Innovation Project", desc: "Identify a problem that puts biodiversity at risk and design an innovative solution that can help, then share it in a live five-minute presentation." },
+  { name: "Robot Design", desc: "Judges assess the team's process of building and coding the robot; the team gets five minutes to explain its design, programs and strategy." },
+  { name: "Robot Game", desc: "Three official 2.5-minute matches; the robot completes as many of the 15 missions as it can autonomously." },
 ];
 
 export const PRECISION_TOKENS = {
@@ -48,190 +43,86 @@ export const PRECISION_TOKENS = {
 };
 
 export const EQUIPMENT_RULES = {
-  inspection: "Before the match, there will be an equipment inspection. If your robot and all equipment fit completely in one launch area and under a height limit of 12 in, you pass inspection.",
+  inspection: "Before the match there is an equipment inspection. All equipment must fit within the two launch areas and under a height limit of 12 in. (305 mm). If your robot and all equipment fit completely in just one launch area under that height limit, the team earns 20 points.",
   noEquipmentConstraint: "When the 'No Equipment Constraint' symbol appears in a mission, the rule is: 'A mission model cannot earn points if it is touching equipment at the end of the match.' This applies only to the specific mission in which the constraint appears.",
 };
 
-export const MISSIONS = [
-  {
-    number: 1,
-    name: "Drone Survey",
-    bags: "1, 2",
-    objective: "Help the pilot launch the drone to create a LiDAR map of this rainforest ecosystem.",
-    conditions: [
-      { id: "m1_drone", label: "The drone is no longer touching the mat", type: "boolean", points: 20 },
-      { id: "m1_bonus", label: "Bonus: the LiDAR map is completely flipped over, with the scan marker at least partly in the survey area", type: "bonus", points: 10, requires: "m1_drone" },
-    ],
-  },
-  {
-    number: 2,
-    name: "Exploding Seeds",
-    bags: "3",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m2_seeds", label: "Number of seeds no longer touching the stalk", type: "count", max: 3, points: null },
-    ],
-  },
-  {
-    number: 3,
-    name: "Flip the Rock",
-    bags: "4, 5",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m3_flag", label: "The research flag is down", type: "boolean", points: null },
-      { id: "m3_bonus", label: "Bonus: and the rock has been returned to its original starting position", type: "bonus", points: null, requires: "m3_flag" },
-    ],
-  },
-  {
-    number: 4,
-    name: "Lucky Leaves",
-    bags: "6",
-    objective: "Details pending verification of the official Robot Game Rulebook. Note: Leaves are randomized by the referee at the start of the match (Challenge Update 01).",
-    conditions: [
-      { id: "m4_leaves", label: "Number of leaves no longer touching the nest", type: "count", max: 2, points: null },
-      { id: "m4_katydid", label: "The katydid is completely in the leaf habitat", type: "boolean", points: null },
-      { id: "m4_bonus", label: "Bonus: and the katydid remained in its original position throughout the match", type: "bonus", points: null, requires: "m4_katydid" },
-    ],
-    update: "Update 01 (Sep 2, 2026): Before the match, leaves are randomized within the nest, and teams will not be told the starting placement of the katydid. If the katydid is completely outside the leaf habitat at any time during the match, the bonus is no longer available. If completely outside at the end, the team scores zero for this mission.",
-  },
-  {
-    number: 5,
-    name: "Reaching Roots",
-    bags: "7",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m5_root", label: "The plant root is extended", type: "tier", options: ["No", "Partially", "Completely"], points: null },
-    ],
-  },
-  {
-    number: 6,
-    name: "Leafcutter Frenzy",
-    bags: "8, 9, 10",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m6_ant", label: "The ant is touching the nest", type: "boolean", points: null },
-      { id: "m6_fragments", label: "Number of leaf fragments contained within the nest", type: "count", max: 4, points: null },
-    ],
-  },
-  {
-    number: 7,
-    name: "Humongous Fungus",
-    bags: "10",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m7_mycelium", label: "The mycelium is completely extended", type: "boolean", points: null },
-      { id: "m7_bonus", label: "Bonus: Number of connections formed between one team's extended mycelium and the opposing team's fully extended plant root", type: "count", max: 2, points: null, requires: "m7_mycelium" },
-    ],
-  },
-  {
-    number: 8,
-    name: "Tangled",
-    bags: "11, 12, 13, 14, 15",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m8_vine", label: "The vine is touching the mat", type: "boolean", points: null },
-    ],
-    update: "Update 03 (Oct 14, 2026): Events are encouraged to stabilize the tree model by applying a thin strip of black tape along the mat border, directly behind the tree. Teams should practice and prepare to compete with either a taped or untaped tree.",
-  },
-  {
-    number: 9,
-    name: "Research Platform",
-    bags: "11, 12, 13, 14, 15",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m9_platform", label: "The research platform is raised", type: "boolean", points: null },
-      { id: "m9_camera", label: "The camera trap is deployed", type: "boolean", points: null },
-      { id: "m9_seed", label: "The seed is no longer touching the tree", type: "boolean", points: null },
-    ],
-    update: "Update 03 (Oct 14, 2026): Tree stabilization guidance applies (see Mission 8).",
-  },
-  {
-    number: 10,
-    name: "Fragile Microhabitats",
-    bags: "16",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m10_spider", label: "The spider habitat is in its original starting position", type: "boolean", points: null },
-      { id: "m10_snail", label: "The snail habitat is in its original starting position", type: "boolean", points: null },
-    ],
-  },
-  {
-    number: 11,
-    name: "Window to the Past",
-    bags: "17",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m11_cover", label: "The root cover is down, touching the mat", type: "boolean", points: null },
-    ],
-  },
-  {
-    number: 12,
-    name: "Forest Elder",
-    bags: "18",
-    objective: "Details pending verification of the official Robot Game Rulebook.",
-    conditions: [
-      { id: "m12_cane", label: "The cane is completely raised, touching the tree", type: "boolean", points: null },
-      { id: "m12_tie", label: "The support tie is around the post", type: "boolean", points: null },
-    ],
-  },
-  {
-    number: 13,
-    name: "Keystone Species",
-    bags: "19, 20",
-    objective: "Details pending verification of the official Robot Game Rulebook. Interchangeable model — placement options: Mine dock, City dock, or Farm dock.",
-    interchangeable: true,
-    conditions: [
-      { id: "m13_keystone", label: "Your keystone species is on the restoration platform, and the young trees are raised", type: "boolean", points: null },
-    ],
-  },
-  {
-    number: 14,
-    name: "Seeds of Renewal",
-    bags: "21",
-    objective: "Details pending verification of the official Robot Game Rulebook. Interchangeable model — placement options: Mine dock, City dock, or Farm dock.",
-    interchangeable: true,
-    conditions: [
-      { id: "m14_seeds", label: "Number of seeds contained within the replantation station", type: "count", max: 4, points: null },
-      { id: "m14_bonus", label: "Bonus: and touching the mat", type: "count", max: 4, points: null, requires: "m14_seeds" },
-    ],
-  },
-  {
-    number: 15,
-    name: "Biocentric Architecture",
-    bags: "22, 23, 24",
-    objective: "Details pending verification of the official Robot Game Rulebook. Interchangeable model — placement options: Mine dock, City dock, or Farm dock.",
-    interchangeable: true,
-    conditions: [
-      { id: "m15_canopy", label: "The nesting canopy is raised", type: "boolean", points: null },
-      { id: "m15_skylight", label: "The garden skylight is completely in", type: "boolean", points: null },
-      { id: "m15_compost", label: "The compost hatch is completely opened, touching the mat", type: "boolean", points: null },
-      { id: "m15_dock", label: "Dock location", type: "select", options: ["Mine", "City"], points: null },
-    ],
-  },
-];
+export { MISSIONS } from "@/lib/missions";
 
+// Only Update 01 is contained in the Challenge Updates document we audited (dated Sept 2, 2026).
+// Updates 02 and 03 appear in earlier website content but are NOT in that document, so they
+// are marked as requiring verification and are not treated as confirmed rules.
 export const CHALLENGE_UPDATES = [
-  {
-    id: "update-03",
-    date: "October 14, 2026",
-    title: "Update 03 — Tree Stabilization (Missions 8 & 9)",
-    body: "Events are encouraged to stabilize the tree model by applying a thin strip of black tape (matte black gaffers tape is recommended) along the mat border, directly behind the tree. Teams should practice and prepare to compete with either a taped or untaped tree, as event conditions may differ from the guidance provided.",
-    affects: ["Missions 8 & 9", "Field setup"],
-  },
-  {
-    id: "update-02",
-    date: "2026 (before Oct 14)",
-    title: "Update 02 — Releasing Interchangeable Models from Docks (Missions 13–15)",
-    body: "Programming the robot to remove an interchangeable model from its dock using the model's built-in latch is allowed when done autonomously during the match. This is consistent with Rule 18, which prohibits separation of Dual Lock, taking models apart, or breaking a mission model.",
-    affects: ["Missions 13–15", "Robot rules"],
-  },
   {
     id: "update-01",
     date: "September 2, 2026",
-    title: "Update 01 — Lucky Leaves",
-    body: "Before the match begins, the leaves will be randomized within the nest, and teams will not be told the starting placement of the katydid. This is an intentional part of the challenge. The following mission constraint language replaces the previous version: The nest is the mission model that holds the leaves and the katydid. The leaf habitat includes the nest and the marked area on the mat that surrounds it. If the katydid is completely outside the leaf habitat at any time during the match, the bonus is no longer available. If the katydid is completely outside the leaf habitat at the end of the match, the team scores zero points for this mission.",
-    affects: ["Mission 4", "Scoring"],
+    verified: true,
+    title: "Update 01 — Lucky Leaves (Mission 4)",
+    body: "Before the match begins, the leaves will be randomized within the nest, and teams will not be told the starting placement of the katydid. This is an intentional part of the challenge. The mission constraints are replaced with: the nest is the mission model that holds the leaves and the katydid; the leaf habitat includes the nest and the marked area on the mat that surrounds it; if the katydid is completely outside the leaf habitat at any time during the match, the bonus is no longer available; if the katydid is completely outside the leaf habitat at the end of the match, the team scores zero points for this mission. Scoring materials will be updated, so download the latest versions.",
+    affects: ["Mission 4", "Scoring", "Practice Score Tracker updated"],
   },
+  {
+    id: "update-02",
+    date: "Date not confirmed",
+    verified: false,
+    title: "Reported Update 02 — Releasing interchangeable models from docks (Missions 13–15)",
+    body: "Earlier site content said that programming the robot to remove an interchangeable model from its dock using the model's built-in latch is allowed when done autonomously. This is NOT in the Sept 2, 2026 document we audited, so treat it as unconfirmed until you read it in the latest official Challenge Updates.",
+    affects: ["Missions 13–15"],
+  },
+  {
+    id: "update-03",
+    date: "Date not confirmed",
+    verified: false,
+    title: "Reported Update 03 — Tree stabilization (Missions 8 & 9)",
+    body: "Earlier site content said events are encouraged to tape the tree model behind the tree. This is NOT in the Sept 2, 2026 document we audited, so treat it as unconfirmed. The Rulebook itself says tournament setups may differ from practice setups, including table construction and surface smoothness (p. 7).",
+    affects: ["Missions 8 & 9", "Field setup"],
+  },
+];
+
+export const JUDGING_FLOW = [
+  { step: "Team welcome", detail: "Introductory conversation while the team sets up materials", time: "2 minutes" },
+  { step: "Innovation Project — team presentation", detail: "Live presentation of the project", time: "5 minutes" },
+  { step: "Innovation Project — question & answer", detail: "Judges ask questions", time: "5 minutes" },
+  { step: "Robot Design — team explanation", detail: "Robot design, programs and strategy (without the game field)", time: "5 minutes" },
+  { step: "Robot Design — question & answer", detail: "Judges ask questions", time: "5 minutes" },
+  { step: "Final share & feedback", detail: "Optional final thoughts; judges may ask clarifying questions and give verbal feedback", time: "Up to 8 minutes" },
+];
+
+export const ROBOT_GAME_RULES = [
+  { group: "Equipment (Rules 1–7)", items: [
+    "All equipment must be LEGO® building pieces in original factory condition (LEGO string and pneumatic tubes may be cut to length).",
+    "Any number of non-electric LEGO pieces from any set may be used.",
+    "Electric equipment: a maximum of one controller, a maximum of four motors (any mix), and only touch/force, color, distance/ultrasonic and gyro sensors (any mix and number).",
+    "LEGO wires, one controller power pack or six AA batteries, and one microSD card are allowed in any one match.",
+    "Any software or programming language may be used. The robot must be autonomous outside of home; no remote controllers of any type.",
+    "One sheet of notebook paper per home area for program notes is allowed and does not count as equipment.",
+    "Additional or duplicate mission models are not allowed.",
+  ]},
+  { group: "Before the match (Rules 8–11)", items: [
+    "Pre-match inspection: all equipment must fit within the two launch areas and under 12 in. (305 mm). Fitting everything in just one launch area under the limit earns 20 points.",
+    "No extra storage space: equipment stays on the table or in the technicians' hands. The areas left and right of the mat may store equipment.",
+    "Teams get a couple of minutes to set up, calibrate sensors using any part of the mat, and ask the referee to check the field.",
+    "Technicians split into two groups, one per side, and cannot switch sides. Teams of four or more: two technicians per home area; three: two on one side and one on the other; two: one per side.",
+  ]},
+  { group: "Inside home (Rules 12–14)", items: [
+    "Technicians may handle the robot, equipment and mission models only when completely within their own home area.",
+    "Technicians may not hand anything between home areas, touch anything outside their home area (except to interrupt the robot), or cause anything to move outside it (except launching). Points scored this way do not count.",
+    "When launching, technicians may not keep anything from moving, and the robot and anything it is about to move must fit completely inside the launch area.",
+  ]},
+  { group: "Outside home (Rules 15–20)", items: [
+    "If technicians interrupt the robot it must be relaunched. If the robot or anything in contact with it was outside home (even partly), the team loses one precision token.",
+    "Teams may not interrupt the robot in a way that earns points from it.",
+    "Equipment or models dropped outside home stay where they rest unless the robot moves them; if partly inside home they may be removed by hand (a removed mission model goes to the referee; removed equipment returns to home and costs one precision token).",
+    "Teams may not separate the Dual Lock, take models apart, or break a mission model. Points scored this way do not count.",
+    "A mission model combined with anything (including the robot) must be loose enough for a technician to free it in perfect original condition in a single motion.",
+    "Teams may not interact with the opposing team's field, robot, equipment or shared mission interactions unless a mission allows it.",
+  ]},
+  { group: "After the match (Rules 21–25)", items: [
+    "After 2.5 minutes the match ends; technicians stop the robot and touch nothing else. Scoring begins.",
+    "All mission requirements must be visibly met at the end of the match unless a method was required. Lines and airspace above an area count as 'in' that area.",
+    "Gracious Professionalism is scored at every match: Accomplished (3) by default, Exceeds (4) or Developing (2). It is added to the Core Values score from judging.",
+    "The referee records results with the team; if there is no agreement the head referee decides. Only the best of the three official matches counts. Ties are broken by second and third best scores.",
+  ]},
 ];
 
 export const ROBOT_DESIGN_RUBRIC = {
@@ -368,7 +259,11 @@ export const RESOURCES = [
   { category: "Robot Game", title: "Robot Game Rulebook", source: "FLL UAE / FIRST® Inspires", url: "https://www.flluae.org/assets/downloads/8.%20fll-challenge-bioglow-rgr%20(1).pdf", available: true },
   { category: "Robot Game", title: "Robot Game Rulebook (Interactive)", source: "FIRST® Inspires", url: "https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/interactive-rgr/index.html", available: true },
   { category: "Robot Game", title: "Robot Game Software Scoresheet", source: "FLL UAE", url: "https://www.flluae.org/assets/downloads/2.%20fll-challenge-bioglow-software-scoresheet.pdf", available: true },
-  { category: "Robot Game", title: "Challenge Updates (updated Oct 14, 2026)", source: "FIRST® Inspires", url: "https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-updates.pdf", available: true },
+  { category: "Robot Game", title: "Challenge Updates (latest version — check for newer updates)", source: "FIRST® Inspires", url: "https://firstinspires.blob.core.windows.net/fll/challenge/2026-27/fll-challenge-bioglow-updates.pdf", available: true },
+  { category: "Audited copies", title: "Robot Game Rulebook — copy used for our audit", source: "FIRST® LEGO® League (uploaded by team)", url: "https://media.base44.com/files/public/6ad0fff488f697790ec48c55/82937211f_fll-founders-challenge-bioglow-RGR_compressed.pdf", available: true },
+  { category: "Audited copies", title: "Team Meeting Guide — copy used for our audit", source: "FIRST® LEGO® League (uploaded by team)", url: "https://media.base44.com/files/public/6ad0fff488f697790ec48c55/6d6413c6f_fll-founders-challenge-bioglow-TMG_compressed.pdf", available: true },
+  { category: "Audited copies", title: "Engineering Notebook — copy used for our audit", source: "FIRST® LEGO® League (uploaded by team)", url: "https://media.base44.com/files/public/6ad0fff488f697790ec48c55/d223a58d3_fll-founders-challenge-bioglow-EN_compressed.pdf", available: true },
+  { category: "Audited copies", title: "Challenge Updates dated Sept 2, 2026 — copy used for our audit", source: "FIRST® LEGO® League (uploaded by team)", url: "https://media.base44.com/files/public/6ad0fff488f697790ec48c55/cfa4aad12_fll-challenge-bioglow-updates.pdf", available: true },
   { category: "Robot Game", title: "Robot Game Updates — Q&A log", source: "FLL UAE", url: "", available: false, note: "Coming soon" },
   { category: "Robot Game", title: "Mission Model Building Instructions", source: "FLL UAE", url: "https://www.flluae.org/assets/downloads/3.%20Building%20instructions.zip", available: true },
   { category: "Robot Game", title: "Field Setup Reference Guide", source: "FLL UAE", url: "https://www.flluae.org/assets/downloads/1.%20fll-challenge-bioglow-field-setup-reference-guide.pdf", available: true },

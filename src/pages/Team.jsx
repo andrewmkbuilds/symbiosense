@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Users, Heart, Lightbulb, Wrench, Code, Bot, Camera } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import TeamHero from "@/components/sections/TeamHero";
 import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
@@ -41,14 +41,10 @@ export default function Team() {
 
   return (
     <div>
-      <PageHero
-        label="Our Team"
-        title="Meet SYMBIONIX"
-        subtitle="The students behind the robot, the innovation project, and everything in between. Click a photo placeholder to add a picture later."
-      />
+      <TeamHero />
 
       {/* Team intro */}
-      <section className="pb-12">
+      <section className="pb-12" id="members">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <TiltCard
             max={3}

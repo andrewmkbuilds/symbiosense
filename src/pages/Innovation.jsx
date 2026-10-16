@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import PageHero from "@/components/PageHero";
+import InnovationHero from "@/components/sections/InnovationHero";
 import Problem from "@/components/sections/Problem";
 import HowItWorks from "@/components/sections/HowItWorks";
 import LiveDemo from "@/components/sections/LiveDemo";
@@ -35,11 +35,7 @@ export default function Innovation() {
 
   return (
     <div>
-      <PageHero
-        label="Innovation Project"
-        title="SYMBIOSENSE"
-        subtitle="Detect the warning. Protect the ecosystem. — our concept for combining biological indicators with AI-assisted detection to help conservation teams prioritise field investigations."
-      />
+      <InnovationHero />
       <Problem />
       <HowItWorks />
       <LiveDemo

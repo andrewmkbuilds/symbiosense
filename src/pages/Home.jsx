@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, Users, FlaskConical, Bot, Cpu, Leaf, Wrench } from "lucide-react";
-import TeamHero from "@/components/home/TeamHero";
+import SymbiosenseHero from "@/components/home/SymbiosenseHero";
 import FeaturedCards from "@/components/home/FeaturedCards";
 import SymbiosenseFeature from "@/components/home/SymbiosenseFeature";
 import TiltCard from "@/components/TiltCard";
@@ -11,8 +11,6 @@ import FadeContent from "@/components/effects/FadeContent";
 import TextReveal from "@/components/effects/TextReveal";
 import Beams from "@/components/effects/Beams";
 import { CORE_VALUES, FOUR_PARTS, SEASON_INFO, OFFICIAL_LINKS } from "@/lib/bioglowData";
-
-const HERO_IMAGE = "https://media.base44.com/images/public/6ad0fff488f697790ec48c55/d7cf008d3_generated_image.png";
 
 const JOURNEY_STEPS = [
   { icon: Users, title: "Team Formation", desc: "Bringing together students with diverse interests in nature, coding, and engineering." },
@@ -26,7 +24,13 @@ const JOURNEY_STEPS = [
 export default function Home() {
   return (
     <div>
-      <TeamHero heroImage={HERO_IMAGE} />
+      <SymbiosenseHero />
+
+      {/* SYMBIOSENSE feature — the primary story, right after the hero */}
+      <SymbiosenseFeature />
+
+      {/* Featured Cards */}
+      <FeaturedCards />
 
       {/* FIRST CANOPY Season Intro */}
       <section className="py-16 sm:py-24 bg-secondary/40 border-y border-border/60 relative overflow-hidden">
@@ -123,10 +127,10 @@ export default function Home() {
               className="mt-3 font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight text-balance text-3d"
             />
             <p className="mt-5 text-muted-foreground leading-relaxed">
-              FIRST® LEGO® League introduces STEM to children through fun, hands-on challenges using LEGO® Education
-              technology. The {SEASON_INFO.umbrella} season features the {SEASON_INFO.name} challenge — the final season
-              of the program. SYMBIONIX competes in the {SEASON_INFO.edition} {SEASON_INFO.program} division
-              (ages {SEASON_INFO.ages}), using {SEASON_INFO.technology}.
+              FIRST® LEGO® League inspires young people to experiment and grow their confidence, critical thinking, and design
+              skills through hands-on learning. This season is {SEASON_INFO.umbrella}, with the {SEASON_INFO.name}{" "}
+              {SEASON_INFO.edition} challenge. SYMBIONIX competes in FIRST® LEGO® League {SEASON_INFO.program}, where teams of up to 10 children
+              build and code a LEGO® robot for the robot game and also complete an innovation project.
             </p>
           </div>
 
@@ -173,9 +177,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Featured Cards */}
-      <FeaturedCards />
 
       {/* FLL Journey Overview */}
       <section className="py-20 sm:py-28 relative overflow-hidden">
@@ -247,7 +248,6 @@ export default function Home() {
         </div>
       </section>
 
-      <SymbiosenseFeature />
     </div>
   );
 }

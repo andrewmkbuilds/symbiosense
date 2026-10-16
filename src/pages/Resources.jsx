@@ -9,7 +9,7 @@ import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
 
-const CATEGORIES = ["All", "Robot Game", "Judging", "Season", "Registration", "General"];
+const CATEGORIES = ["All", "Audited copies", "Robot Game", "Judging", "Season", "Registration", "General"];
 
 const DEFAULT_TEAM_RESOURCES = [
   { id: 1, title: "Project Presentation", url: "", desc: "Our innovation project presentation slides" },

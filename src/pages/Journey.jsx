@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Leaf, FlaskConical, Bot, Cpu, Wrench, Calendar, Plus, CheckCircle2, Circle, Trophy, TrendingUp } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import JourneyHero from "@/components/sections/JourneyHero";
 import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
@@ -32,14 +32,15 @@ export default function Journey() {
 
   return (
     <div>
-      <PageHero
-        label="Our Journey"
-        title="The SYMBIONIX Season Journey"
-        subtitle="An interactive timeline of our BIOGLOW™ 2026–2027 season — from team formation to competition day. Track progress, edit dates, and mark milestones as complete."
+      <JourneyHero
+        doneCount={doneCount}
+        total={milestones.length}
+        progress={progress}
+        nextUp={milestones.find((m) => !m.done)?.title?.split(" ")[0]}
       />
 
       {/* Progress overview */}
-      <section className="pb-10">
+      <section className="pb-10" id="timeline">
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <TiltCard max={3} scale={1.005} depth={20} className="rounded-2xl glass-strong depth-shadow-md p-6 sm:p-8" contentClassName="p-0">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-5">

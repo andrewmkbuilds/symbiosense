@@ -7,12 +7,18 @@ import Grainient from "@/components/effects/Grainient";
 import TextReveal from "@/components/effects/TextReveal";
 import GradientText from "@/components/effects/GradientText";
 import Beams from "@/components/effects/Beams";
+import Starfield from "@/components/effects/Starfield";
+import ShinyText from "@/components/effects/ShinyText";
+import MagneticButton from "@/components/effects/MagneticButton";
 
 export default function TeamHero({ heroImage }) {
   return (
     <section id="top" className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 overflow-hidden">
       {/* Background layers */}
       <div className="absolute inset-0 -z-30">
+        <Starfield starCount={180} speed={0.012} starColor="#9ABF82" glowColor="#438B78" baseSize={1} />
+      </div>
+      <div className="absolute inset-0 -z-25">
         <Aurora
           colorStops={["#173F32", "#438B78", "#9ABF82"]}
           amplitude={1.2}
@@ -77,8 +83,8 @@ export default function TeamHero({ heroImage }) {
             </GradientText>
           </h1>
 
-          <p className="mt-3 font-display text-xl sm:text-2xl text-brand-teal italic text-glow-soft">
-            "Connected by Nature. Driven by Innovation."
+          <p className="mt-3 font-display text-xl sm:text-2xl italic text-glow-soft">
+            <ShinyText text='"Connected by Nature. Driven by Innovation."' duration={4} baseColor="hsl(172 35% 38%)" shimmerColor="hsl(95 28% 63%)" />
           </p>
 
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed max-w-xl">
@@ -89,12 +95,14 @@ export default function TeamHero({ heroImage }) {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <Link
-              to="/team"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground btn-3d btn-glow"
-            >
-              <Users className="h-4 w-4" /> Meet the Team
-            </Link>
+            <MagneticButton strength={0.35} radius={110}>
+              <Link
+                to="/team"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground btn-3d btn-glow"
+              >
+                <Users className="h-4 w-4" /> Meet the Team
+              </Link>
+            </MagneticButton>
             <Link
               to="/innovation"
               className="inline-flex items-center justify-center gap-2 rounded-full glass px-6 py-3.5 text-sm font-semibold text-primary hover:bg-white/70 transition-all"

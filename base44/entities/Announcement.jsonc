@@ -1,0 +1,39 @@
+{
+  "name": "Announcement",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Headline of the announcement"
+    },
+    "description": {
+      "type": "string",
+      "description": "Full text of the announcement or update"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Publication date"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Team",
+        "Robot Game",
+        "Innovation",
+        "Event",
+        "General"
+      ],
+      "default": "General"
+    },
+    "link": {
+      "type": "string",
+      "description": "Optional external URL for more detail"
+    }
+  },
+  "required": [
+    "title",
+    "description",
+    "date"
+  ]
+}

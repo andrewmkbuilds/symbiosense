@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Bot, Target, ClipboardList, Trophy, Plus, CheckCircle2, Clock, Info, AlertTriangle, ExternalLink, BookOpen, Settings, Zap } from "lucide-react";
-import PageHero from "@/components/PageHero";
+import RobotGameHero from "@/components/sections/RobotGameHero";
 import MissionTracker from "@/components/MissionTracker";
 import OfficialSources from "@/components/OfficialSources";
 import { MISSIONS, CHALLENGE_UPDATES, SEASON_INFO, PRECISION_TOKENS, EQUIPMENT_RULES, OFFICIAL_LINKS } from "@/lib/bioglowData";
@@ -8,9 +8,12 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
 import Grainient from "@/components/effects/Grainient";
+import OfficialRulesDetail from "@/components/OfficialRulesDetail";
+import { formatPoints } from "@/lib/scoring";
 
+// SYMBIONIX checklist (our own, not an official FLL list)
 const PREP_ITEMS = [
-  "Robot passes inspection (fits in launch area, under 12 in)",
+  "Robot fits in one launch area and under 12 in. (305 mm) for inspection",
   "All attachments labelled and organised",
   "Code reviewed and commented",
   "Battery fully charged",
@@ -30,36 +33,14 @@ export default function RobotGame() {
 
   return (
     <div>
-      <PageHero
-        label="Robot Game"
-        title="BIOGLOW™ Robot Game"
-        subtitle="The official 2026–2027 BIOGLOW™ Founders Edition Challenge missions, rules, scoring, and updates — verified from official FIRST® LEGO® League sources. Plus our team's practice tracker."
+      <RobotGameHero
+        matchDuration={SEASON_INFO.matchDuration}
+        missionCount={MISSIONS.length}
+        program={SEASON_INFO.program}
       />
 
-      {/* Season overview */}
-      <section className="pb-10">
-        <div className="mx-auto max-w-7xl px-5 sm:px-8">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { icon: Clock, label: "Match Duration", value: SEASON_INFO.matchDuration },
-              { icon: Target, label: "Missions", value: `${MISSIONS.length} missions` },
-              { icon: BookOpen, label: "Programme", value: SEASON_INFO.program },
-              { icon: Bot, label: "Technology", value: "SPIKE™ Prime" },
-            ].map((s) => (
-              <div key={s.label} className="[perspective:1000px]">
-                <TiltCard max={6} depth={20} className="rounded-2xl glass p-5 h-full card-shine" contentClassName="p-0">
-                  <s.icon className="h-5 w-5 mb-2 text-brand-teal" />
-                  <p className="text-lg font-bold text-primary">{s.value}</p>
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground font-mono mt-1">{s.label}</p>
-                </TiltCard>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Official missions */}
-      <section className="py-12 relative overflow-hidden">
+      <section className="py-12 relative overflow-hidden" id="missions">
         <div className="absolute inset-0 -z-10">
           <Grainient colors={["#173F32", "#438B78", "#9ABF82"]} angle={55} flow={0.3} speed={0.2} grainAmount={0.03} opacity={0.08} />
         </div>
@@ -70,14 +51,14 @@ export default function RobotGame() {
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary mb-3 text-3d">All 15 BIOGLOW™ Missions</h2>
           <p className="text-sm text-muted-foreground mb-2 max-w-3xl">
-            Mission names, numbers, and scoring conditions are verified from the official Robot Game Rulebook and Scoresheet.
-            Point values are included where verified; remaining values are pending verification against the official rulebook.
+            Official FLL information. Mission names, numbers, descriptions and point values below were checked against the official Robot Game Rulebook (pages 5 and 8–12),
+            with Challenge Update 01 applied to Mission 4.
           </p>
           <div className="flex items-start gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/5 p-3.5 mb-6 max-w-3xl">
             <AlertTriangle className="h-4 w-4 shrink-0 mt-0.5 text-amber-600" />
             <p className="text-xs text-amber-700 leading-relaxed">
-              Mission objectives for missions 2–15 are pending verification of the official Robot Game Rulebook.
-              Scoring conditions are verified from the official Robot Game Scoresheet. Do not rely on unverified details for strategy decisions.
+              Missions marked "No Equipment" show the Rulebook symbol: the mission model cannot earn points if it is touching equipment at the end of the match.
+              Always check the latest Challenge Updates before your event — they supersede the Rulebook.
             </p>
           </div>
 
@@ -98,7 +79,7 @@ export default function RobotGame() {
                   </span>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-heading text-base font-bold text-primary">{m.name}</h3>
-                    <p className="text-[11px] text-muted-foreground font-mono">Bags: {m.bags}{m.interchangeable ? " · Interchangeable dock" : ""}</p>
+                    <p className="text-[11px] text-muted-foreground font-mono">Bags: {m.bags}{m.interchangeable ? " · Interchangeable dock" : ""}{m.noEquipment ? " · No Equipment" : ""}</p>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">{m.objective}</p>
@@ -111,8 +92,8 @@ export default function RobotGame() {
                   {m.conditions.map((c) => (
                     <div key={c.id} className="flex items-center justify-between gap-3 text-sm border-b border-border/40 pb-1.5 last:border-0">
                       <span className="text-foreground/80 leading-snug">{c.label}</span>
-                      <span className={`text-xs font-semibold font-mono whitespace-nowrap ${c.points !== null ? "text-brand-teal" : "text-amber-600"}`}>
-                        {c.points !== null ? `+${c.points} pts` : "Pending"}
+                      <span className="text-xs font-semibold font-mono whitespace-nowrap text-brand-teal">
+                        {formatPoints(c)}{c.type === "flag" || c.type === "select" ? "" : " pts"}
                       </span>
                     </div>
                   ))}
@@ -132,9 +113,9 @@ export default function RobotGame() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="flex items-center gap-2 mb-2">
             <Target className="h-5 w-5 text-brand-teal" />
-            <p className="text-xs uppercase tracking-[0.22em] text-brand-teal font-semibold font-mono">Interactive Tracker</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-brand-teal font-semibold font-mono">SYMBIONIX practice tool</p>
           </div>
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary mb-6 text-3d">Mission Score Tracker</h2>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary mb-6 text-3d">SYMBIONIX Practice Score Tracker</h2>
           <div className="max-w-3xl">
             <MissionTracker />
           </div>
@@ -196,10 +177,11 @@ export default function RobotGame() {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Missions 13–15 use a new <span className="font-semibold text-foreground">interchangeable dock system</span>.
                 The docks are secured with Dual Lock, and teams can choose which mission model to place on each of the
-                three docks (mine, city, farm) before the match.
+                three docks (mine, city, farm) before the match. Placement of these three models is part of your mission strategy.
               </p>
             </div>
           </div>
+          <OfficialRulesDetail />
         </div>
       </section>
 
@@ -212,8 +194,9 @@ export default function RobotGame() {
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary mb-3 text-3d">Official Challenge Updates</h2>
           <p className="text-sm text-muted-foreground mb-6 max-w-3xl">
-            FIRST® LEGO® League-issued updates supersede all other sources. Always check the latest updates before your event.
-            The latest version was updated on <span className="font-semibold text-foreground">October 14, 2026</span>.
+            FIRST® LEGO® League-issued updates supersede all other sources. The newest official document we have checked is dated{" "}
+            <span className="font-semibold text-foreground">September 2, 2026</span> and contains Update 01 only. Items marked
+            "requires verification" are not in that document — check the latest official file before relying on them.
           </p>
           <div className="space-y-4 max-w-4xl">
             {CHALLENGE_UPDATES.map((u) => (
@@ -222,6 +205,9 @@ export default function RobotGame() {
                   <h3 className="font-heading text-base font-bold text-primary">{u.title}</h3>
                   <span className="text-xs text-muted-foreground font-mono whitespace-nowrap">{u.date}</span>
                 </div>
+                <span className={`inline-block mb-2 text-[10px] uppercase tracking-wide font-semibold font-mono px-2 py-0.5 rounded-full ${u.verified ? "bg-brand-teal/10 text-brand-teal" : "bg-amber-500/10 text-amber-700"}`}>
+                  {u.verified ? "Verified in official document" : "Requires verification"}
+                </span>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-3">{u.body}</p>
                 <div className="flex flex-wrap gap-2">
                   {u.affects.map((a) => (
@@ -323,7 +309,7 @@ export default function RobotGame() {
           { label: "Robot Game Rulebook (UAE)", url: OFFICIAL_LINKS.uaeRulebook },
           { label: "Robot Game Rulebook (FIRST® Inspires)", url: OFFICIAL_LINKS.fiRulebook },
           { label: "Robot Game Scoresheet (UAE)", url: OFFICIAL_LINKS.uaeScoresheet },
-          { label: "Challenge Updates (Oct 14, 2026)", url: OFFICIAL_LINKS.fiUpdates },
+          { label: "Challenge Updates (latest official file)", url: OFFICIAL_LINKS.fiUpdates },
           { label: "Field Setup Reference Guide (UAE)", url: OFFICIAL_LINKS.uaeFieldSetupGuide },
           { label: "Mission Model Building Instructions (UAE)", url: OFFICIAL_LINKS.uaeBuildingInstructions },
           { label: "Robot Game Missions Video", url: OFFICIAL_LINKS.videoMissions },

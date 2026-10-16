@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Bot, Wrench, Code, Cpu, Camera, GitBranch, FlaskConical, BookOpen, ExternalLink, Award } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import OfficialSources from "@/components/OfficialSources";
+import JudgingSessionFlow from "@/components/JudgingSessionFlow";
 import { ROBOT_DESIGN_RUBRIC, OFFICIAL_LINKS, SEASON_INFO } from "@/lib/bioglowData";
 import TiltCard from "@/components/TiltCard";
 import DotField from "@/components/effects/DotField";
@@ -9,11 +10,12 @@ import Grainient from "@/components/effects/Grainient";
 
 const BUILD_IMAGES = Array.from({ length: 6 }, (_, i) => i);
 
+// Placeholders only — the team has not yet supplied robot specifications.
 const DESIGN_DECISIONS = [
-  { title: "Chassis Choice", body: "Our chassis is built for stability on the BIOGLOW™ mat. We're testing a compact design that fits within the 12-inch height limit and the launch area, with a low centre of gravity for consistent navigation." },
-  { title: "Attachment System", body: "We're developing modular attachments for the 15 BIOGLOW™ missions, including mechanisms for the Drone Survey, Exploding Seeds, and the interchangeable dock missions (13–15). Quick-swap design allows fast changes between runs." },
-  { title: "Sensor Placement", body: "We're using SPIKE™ Prime color and gyro sensors for line following and navigation. Sensors are positioned for reliable detection on the competition mat, accounting for the mat's lighting conditions." },
-  { title: "Code Architecture", body: "Our code is organised into reusable mission blocks for each of the 15 BIOGLOW™ missions. Veer leads coding with modular blocks that can be tested and debugged independently, with comments explaining each block." },
+  { title: "Chassis", body: "To be added by the team: our drive base design and why we chose it. (Official limit: all equipment must fit the launch areas and stay under 12 in. / 305 mm.)" },
+  { title: "Attachments", body: "To be added by the team: each attachment, its purpose and the missions it supports." },
+  { title: "Sensors & code", body: "To be added by the team: the sensors and programs we use and how they support our mission strategy. (Official limit: up to 4 motors and 1 controller; touch/force, color, distance and gyro sensors only.)" },
+  { title: "Testing & improvements", body: "To be added by the team: what we tested, what we changed and what we learned — judges want to hear the changes made along the way." },
 ];
 
 export default function RobotDesign() {
@@ -22,7 +24,7 @@ export default function RobotDesign() {
       <PageHero
         label="Robot Design"
         title="Robot Design & Judging"
-        subtitle="Official BIOGLOW™ Robot Design judging rubric and criteria, plus our team's robot-building journey. Official rubric content is verified from the official Challenge Judging Rubric."
+        subtitle="Official BIOGLOW™ Robot Design judging information, kept separate from our team's own robot notes and tips."
       />
 
       {/* Official rubric */}
@@ -38,8 +40,13 @@ export default function RobotDesign() {
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-primary mb-3 text-3d">Robot Design Rubric</h2>
           <p className="text-sm text-muted-foreground mb-6 max-w-3xl">
             Judges evaluate Robot Design across five categories: Identify, Design, Create, Iterate, and Communicate.
-            Each row is rated Beginning (1), Developing (2), Accomplished (3), or Exceeds (4). Core Values make up 25% of
-            the Champion's score and are demonstrated throughout the team's work.
+            Each row is rated Beginning (1), Developing (2), Accomplished (3), or Exceeds (4). FIRST® LEGO® League is evaluated
+            equally in four areas — Core Values, Innovation Project, Robot Design and Robot Game — and Core Values are evaluated in all parts of a team's work.
+            In the judging session the team gets five minutes to explain its robot design, programs and strategy, followed by five minutes of questions.
+          </p>
+          <p className="text-xs text-amber-700 bg-amber-500/5 border border-amber-500/20 rounded-lg p-2.5 mb-6 max-w-3xl leading-relaxed">
+            Note: the category names and four rating levels match the official materials we audited. The exact row wording below comes from the official rubric PDF,
+            which was shown only as a small picture in the audited files — please read the linked official rubric for the definitive wording.
           </p>
 
           <div className="space-y-4">
@@ -80,6 +87,8 @@ export default function RobotDesign() {
             ))}
           </div>
 
+          <JudgingSessionFlow />
+
           <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
             {[
               { label: "Challenge Judging Rubric (PDF)", url: OFFICIAL_LINKS.uaeJudgingRubric },
@@ -105,16 +114,16 @@ export default function RobotDesign() {
         </div>
         <div className="mx-auto max-w-7xl px-5 sm:px-8">
           <div className="rounded-2xl border border-brand-teal/30 bg-brand-teal/5 p-4 mb-6">
-            <p className="text-xs uppercase tracking-[0.22em] text-brand-teal font-bold font-mono">SYMBIONIX Practice Tips</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-brand-teal font-bold font-mono">Optional advice · Team Meeting Guide</p>
             <p className="text-sm text-muted-foreground mt-1">
-              These are our team's own tips — not official judging requirements. We've labelled them clearly so they are never confused with official FLL guidance.
+              These tips come from the official Team Meeting Guide's session tips. They are suggestions, not judging requirements or Robot Game rules.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-4">
             {[
-              { icon: BookOpen, title: "Document Everything", body: "We keep notes on every design decision, code change, and test result so we can explain our process to judges." },
-              { icon: Wrench, title: "Test on the Real Mat", body: "We practice on the actual competition mat surface to account for friction and lighting differences." },
-              { icon: Code, title: "Comment Our Code", body: "Every mission block has comments explaining what it does, so any team member can understand and debug it." },
+              { icon: BookOpen, title: "Record your changes", body: "Judges will want to hear what changes you made along the way to understand your design and testing process (TMG Session 8 tip)." },
+              { icon: Wrench, title: "Test repeatedly, change one thing", body: "Test missions multiple times and change one thing at a time to see what caused an improvement (TMG Session 8 tips)." },
+              { icon: Code, title: "Name and back up programs", body: "Clearly name and organize programs so they can be found quickly, and keep a backup on an external drive or online storage (TMG Sessions 8–9 tips)." },
             ].map((t) => (
               <div key={t.title} className="rounded-2xl glass p-5 depth-shadow-sm">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary mb-3">
@@ -145,8 +154,8 @@ export default function RobotDesign() {
             <h2 className="font-heading text-xl font-bold text-primary">Our Robot Overview</h2>
           </div>
           <p className="text-muted-foreground leading-relaxed mb-6 max-w-3xl">
-            Our robot is being designed and built for the BIOGLOW™ robot game using {SEASON_INFO.technology}.
-            We are working through the engineering design process — brainstorming, prototyping, testing, and iterating.
+            Robot details will be added here by the team. Officially, teams build and code a LEGO® robot with LEGO Education sets
+            ({SEASON_INFO.technology}) and use the Engineering Design Process: Identify, Design, Create, Iterate, Communicate.
           </p>
 
           <p className="text-xs uppercase tracking-[0.22em] text-brand-teal font-semibold font-mono mb-2">Build Gallery</p>
@@ -167,8 +176,7 @@ export default function RobotDesign() {
               </span>
               <h3 className="font-heading text-lg font-bold text-primary">Chassis</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                Our chassis design focuses on stability, precise movement, and quick attachment swaps. Details about
-                drive type, wheel configuration, and structural choices will be added here.
+                Details about our drive type, wheel configuration, and structural choices will be added here when the team shares them.
               </p>
             </div>
             <div className="rounded-2xl glass p-6 depth-shadow-sm">
@@ -177,8 +185,7 @@ export default function RobotDesign() {
               </span>
               <h3 className="font-heading text-lg font-bold text-primary">Attachments</h3>
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                We are designing modular attachments for different mission sets. Each attachment will be documented
-                with its purpose, mechanism, and the missions it supports.
+                Each attachment will be documented here with its purpose, mechanism, and the missions it supports, once the team shares them.
               </p>
             </div>
           </div>

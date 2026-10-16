@@ -7,18 +7,18 @@ import GradientText from "@/components/effects/GradientText";
 
 const CARDS = [
   {
-    icon: Users,
-    title: "Our Team",
-    desc: "Meet the students behind SYMBIONIX — coders, builders, researchers, and presenters working together.",
-    to: "/team",
-    accent: "#9ABF82",
-  },
-  {
     icon: FlaskConical,
     title: "Innovation Project",
     desc: "SYMBIOSENSE — our concept for combining biological indicators with AI-assisted detection to help conservation teams prioritise field investigations.",
     to: "/innovation",
     accent: "#438B78",
+  },
+  {
+    icon: Users,
+    title: "Our Team",
+    desc: "Meet the students behind SYMBIONIX — coders, builders, researchers, and presenters working together.",
+    to: "/team",
+    accent: "#9ABF82",
   },
   {
     icon: Bot,

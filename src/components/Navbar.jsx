@@ -5,13 +5,15 @@ import { Leaf, Menu, X } from "lucide-react";
 
 const NAV = [
   { label: "Home", to: "/" },
-  { label: "Team", to: "/team" },
-  { label: "Innovation", to: "/innovation" },
+  { label: "SYMBIOSENSE", to: "/innovation", highlight: true },
+  { label: "Our Team", to: "/team" },
+  { label: "Our Journey", to: "/journey" },
   { label: "Robot Game", to: "/robot-game" },
   { label: "Robot Design", to: "/robot-design" },
-  { label: "Journey", to: "/journey" },
   { label: "Gallery", to: "/gallery" },
   { label: "Resources", to: "/resources" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {
@@ -57,7 +59,7 @@ export default function Navbar() {
                 end={l.to === "/"}
                 className={({ isActive }) =>
                   `relative px-3 py-2 text-xs font-semibold uppercase tracking-wide rounded-lg transition-colors ${
-                    isActive ? "text-primary" : "text-foreground/60 hover:text-primary"
+                    isActive ? "text-primary" : l.highlight ? "text-brand-teal bg-accent/25 hover:text-primary" : "text-foreground/60 hover:text-primary"
                   }`
                 }
               >

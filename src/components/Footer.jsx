@@ -10,6 +10,8 @@ const NAV = [
   { label: "Journey", to: "/journey" },
   { label: "Gallery", to: "/gallery" },
   { label: "Resources", to: "/resources" },
+  { label: "About", to: "/about" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Footer() {
